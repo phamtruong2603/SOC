@@ -45,7 +45,8 @@ const Bai1 = () => {
     };
     const submit = async (e) => {
         console.log(data)
-        success()
+        
+        error()
 
     }
     return (

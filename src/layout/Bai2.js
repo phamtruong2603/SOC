@@ -17,7 +17,7 @@ const Bai2 = () => {
     }
     console.log(data)
     const submit = () => {
-
+        console.log(data)
     }
     return (
         <Form
