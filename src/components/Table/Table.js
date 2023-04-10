@@ -71,7 +71,7 @@ import { Space, Table, Tag } from 'antd';
 //     },
 // ];
 
-const Table_component = ({ dataTable }) => {
+const TableComponent = ({ dataTable }) => {
     console.log(dataTable)
     return (
         <Table className='Table_component'
@@ -80,4 +80,4 @@ const Table_component = ({ dataTable }) => {
         />
     )
 }
-export default Table_component;
+export default TableComponent;
