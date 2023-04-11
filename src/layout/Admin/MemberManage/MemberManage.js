@@ -37,26 +37,26 @@ const dataTable = {
         {
             key: '1',
             id: '1',
-            avatar: 'Công ty bất động sản Đà nẵng',
-            name: 'Thu',
-            task: '15/03/2023',
-            complete: '500.000VND'
+            avatar: '0',
+            name: 'abc abc  abc',
+            task: '15',
+            complete: '0'
         },
         {
             key: '2',
             id: '2',
             avatar: 42,
-            name: 'Chi',
-            task: '15/03/2023',
-            complete: '500.000VND'
+            name: 'bcd bcd bcd',
+            task: '10',
+            complete: '0'
         },
         {
             key: '3',
             id: '3',
             avatar: 32,
-            name: 'Thu',
-            task: '15/03/2023',
-            complete: '500.000VND'
+            name: 'def def def',
+            task: '20',
+            complete: '0'
         },
     ]
 }

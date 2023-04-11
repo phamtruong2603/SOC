@@ -20,9 +20,12 @@ const RenderOption = ({ id }) => {
         <Routes>
             {Admin_option.map((value, index) => {
                 const Render = value.component
+                let path = `/${value.path}`
+                if (value.chidren)
+                    path = `/${value.path}/*`
                 return (
                     <Route key={value.id}
-                        path={`/${value.path}`}
+                        path={path}
                         element={<Render />}
                     />
                 )
@@ -50,6 +53,7 @@ const Admin = () => {
     const item = [
         { title: 'Admin' },
         { title: <Link to={`${option && option.path}`}>{option && option.name}</Link> },
+        { title: '' }
     ]
 
     useEffect(() => {

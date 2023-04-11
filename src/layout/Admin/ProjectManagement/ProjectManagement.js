@@ -1,43 +1,19 @@
 import React, { useContext, useState } from 'react';
 import './ProjectManagement.css';
 import CardProject from '../../../components/Card/CardProject';
+import AddProject from './AddProject';
 import { ProjectContexts } from '../../../api/ProjectContext';
 import { PlusOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 const { Search } = Input;
 
-const ProjectManagement = () => {
-    const { project, setProject } = useContext(ProjectContexts);
+const ProjectManagementMain = () => {
+    const { project } = useContext(ProjectContexts);
+    const navigate = useNavigate()
     const [search, setSearch] = useState([]);
     const addProject = () => {
-        setProject([
-            {
-                id: 2,
-                name: "Project name 1",
-                deadline: "22/07/2001",
-                leader: {
-                    id: 20,
-                    name: "Nguyen Van B",
-                    avatar: ""
-                },
-                member: [
-                    {
-                        id: 21,
-                        name: "Nguyen Van B",
-                        avatar: ""
-                    },
-                    {
-                        id: 22,
-                        name: "Nguyen Van B",
-                        avatar: ""
-                    }
-                ],
-                progress: "50%",
-                running: 0,
-                complete: 0
-            },
-            ...project
-        ])
+        navigate('addproject')
     }
     const onSearch = (search) => {
         const data = project.filter(value => {
@@ -67,8 +43,8 @@ const ProjectManagement = () => {
             <div className='body_ProjectManagement'>
                 {project.map((value, index) => {
                     let isSearch = false
-                    const a =search.filter(val => val === value)
-                    if(a.length) isSearch = true
+                    const a = search.filter(val => val === value)
+                    if (a.length) isSearch = true
                     console.log(isSearch)
                     return (
                         <CardProject
@@ -79,8 +55,22 @@ const ProjectManagement = () => {
                     )
                 })}
             </div>
-
         </div>
+    )
+}
+
+const ProjectManagement = () => {
+    return (
+        <Routes>
+            <Route
+                path="/"
+                element={<ProjectManagementMain />}
+            />
+            <Route
+                path="/addproject"
+                element={<AddProject />}
+            />
+        </Routes>
     )
 }
 

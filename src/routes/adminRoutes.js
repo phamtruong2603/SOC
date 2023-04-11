@@ -1,6 +1,7 @@
 import Statistical from "../layout/Admin/Statistical/Statistical";
 import ProjectManagement from "../layout/Admin/ProjectManagement/ProjectManagement";
 import MemberManage from "../layout/Admin/MemberManage/MemberManage";
+import AddProject from "../layout/Admin/ProjectManagement/AddProject";
 
 export const Admin_option = [
     {
@@ -18,7 +19,7 @@ export const Admin_option = [
             id: 11,
             name: 'Thêm dự án',
             path: 'addprject',
-            component: ProjectManagement,
+            component: AddProject,
         }
     },
     {
