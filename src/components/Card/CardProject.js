@@ -2,20 +2,18 @@ import React from 'react';
 import './card.css';
 import Avatar from '../Avatar/Avatar';
 
-const CardProject = () => {
-    const user = [1, 2, 3, 4, 5]
-    const success = '25%'
+const CardProject = ({ value, isSearch }) => {
     return (
-        <div className='CardProject'>
+        <div className={`CardProject ${isSearch ? 'isSearch' : ''}`}>
             <header className='title_Project'>
-                <span className='title_Project-name'>Name Project</span>
-                <span className='title_Project-process'><span>0</span> đang chạy <span>0</span> hoàn thành</span>
+                <span className='title_Project-name'>{value.name}</span>
+                <span className='title_Project-process'><span>{value.running}</span> đang chạy <span>{value.complete}</span> hoàn thành</span>
             </header>
             <div className='detail_Project'>
                 <div className='detail_Project-header'>Chi tiết: </div>
                 <div className='detail_Project-deadline'>
                     <span>Deadline</span>
-                    <span>15/03/2001</span>
+                    <span>{value.deadline}</span>
                 </div>
                 <div className='detail_Project-leader'>
                     <span>Project Leader</span>
@@ -24,9 +22,9 @@ const CardProject = () => {
                 <div className='detail_Project-member'>
                     <span>Thành Viên</span>
                     <div>
-                        {user.map((value) => {
+                        {value.member.map((value, index) => {
                             return (
-                                <div><Avatar circle="40px" /></div>
+                                <div key={value.id}><Avatar circle="40px" /></div>
                             )
                         })}
                     </div>
@@ -35,10 +33,10 @@ const CardProject = () => {
             <div className='progress_Project'>
                 <div className='progress_Project-header'>
                     <span>Progress</span>
-                    <span>{success}</span>
+                    <span>{value.progress}</span>
                 </div>
                 <div className='progress_load'>
-                    <div className='progress_loading' style={{ width: `${success}` }}></div>
+                    <div className='progress_loading' style={{ width: `${value.progress}` }}></div>
                 </div>
             </div>
         </div>

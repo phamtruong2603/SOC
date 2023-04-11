@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-operators */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Admin_option } from '../../routes/adminRoutes.js';
+import { ProjectContexts } from '../../api/ProjectContext.js';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import { Route, Routes, useNavigate, Link } from 'react-router-dom';
 const { Header, Content, Sider } = Layout;
@@ -31,6 +32,8 @@ const RenderOption = ({ id }) => {
 }
 
 const Admin = () => {
+    const { project } = useContext(ProjectContexts)
+    console.log(project)
     const navigate = useNavigate()
     const [option, setOption] = useState();
     const onclick = (value) => {
@@ -44,7 +47,6 @@ const Admin = () => {
     const {
         token: { colorBgContainer },
     } = theme.useToken();
-    console.log(option)
     const item = [
         { title: 'Admin' },
         { title: <Link to={`${option && option.path}`}>{option && option.name}</Link> },

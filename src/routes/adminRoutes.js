@@ -1,5 +1,6 @@
 import Statistical from "../layout/Admin/Statistical/Statistical";
 import ProjectManagement from "../layout/Admin/ProjectManagement/ProjectManagement";
+import MemberManage from "../layout/Admin/MemberManage/MemberManage";
 
 export const Admin_option = [
     {
@@ -24,7 +25,7 @@ export const Admin_option = [
         id: 2,
         name: 'Quản lý thành viên',
         path: 'membermanage',
-        component: () => <></>,
+        component: MemberManage,
     },
     {
         id: 3,
