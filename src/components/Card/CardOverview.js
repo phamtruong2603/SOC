@@ -3,7 +3,8 @@ import { Card } from 'antd';
 import { Avatar, Space } from 'antd';
 import { UserOutlined, ProjectOutlined } from '@ant-design/icons';
 import { FaTasks } from "react-icons/fa";
-export const CardOverview = ({ number, text, icon }) => {
+
+const CardOverview = ({ number, text, icon }) => {
     let Icon
     icon === "project" ? Icon = ProjectOutlined : icon === "task" ? Icon = FaTasks : Icon = UserOutlined
     return (
@@ -23,13 +24,4 @@ export const CardOverview = ({ number, text, icon }) => {
     )
 }
 
-export const CardPrice = ({ number, text, backgroundColor, colorText }) => {
-    return (
-        <Card style={{ width: '48%', backgroundColor: backgroundColor }}>
-            <div style={{ textAlign: "center" }}>
-                <span style={{ display: "block", fontSize: '1.1rem', fontWeight: '600' }}>{text}</span>
-                <span style={{ display: "block", color: colorText }}>{number}</span>
-            </div>
-        </Card>
-    )
-}
+export default CardOverview

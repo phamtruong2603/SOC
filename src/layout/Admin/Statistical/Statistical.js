@@ -1,7 +1,9 @@
 import React from 'react';
 import './Statistical.css';
 import TableComponent from '../../../components/Table/Table';
-import { CardOverview, CardPrice } from '../../../components/Card/card';
+// import { CardOverview, CardPrice } from '../../../components/Card/card';
+import CardOverview from '../../../components/Card/CardOverview.js'
+import CardPrice from '../../../components/Card/CardPrice.js'
 import { Card } from 'antd';
 import {
   CheckCircleOutlined,

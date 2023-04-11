@@ -1,4 +1,5 @@
 import Statistical from "../layout/Admin/Statistical/Statistical";
+import ProjectManagement from "../layout/Admin/ProjectManagement/ProjectManagement";
 
 export const Option_link = [
     {
@@ -11,7 +12,7 @@ export const Option_link = [
         id: 1,
         name: 'Quản lý dự án',
         path: 'projectmanagement',
-        component: ()=> <></>,
+        component: ProjectManagement,
     },
     {
         id: 2,
