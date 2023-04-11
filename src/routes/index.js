@@ -1,6 +1,7 @@
 import React from "react";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Protected from "./Protected.js";
+// import Admin from "../layout/Admin/index.js";
 import Admin from "../layout/Admin/index.js";
 
 export default (
@@ -15,7 +16,7 @@ export default (
         /> */}
         <Route element={<Protected />}>
             <Route
-                path="/admin"
+                path="/admin/*"
                 element={<Admin />}
             />
             {/* <Route

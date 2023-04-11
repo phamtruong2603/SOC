@@ -10,6 +10,16 @@
     color: var(--color-text);
 }
 
+.search_ProjectManagement {
+    display: flex;
+    align-items: center;
+}
+
+.Add_ProjectManagement {
+    display: flex;
+    align-items: center;
+}
+
 .Add_ProjectManagement button {
     padding: 0.7rem 1.5rem;
     border: none;
@@ -18,4 +28,12 @@
     background-color: #25c8f1;
     color: white;
     font-weight: 700;
+}
+
+.body_ProjectManagement {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    row-gap: 1rem;
+    margin-top: 1rem;
 }

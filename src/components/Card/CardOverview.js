@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from 'antd';
-import { Avatar, Space } from 'antd';
+import { Avatar } from 'antd';
 import { UserOutlined, ProjectOutlined } from '@ant-design/icons';
 import { FaTasks } from "react-icons/fa";
 

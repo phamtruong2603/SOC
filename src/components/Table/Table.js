@@ -1,4 +1,4 @@
-import { Space, Table, Tag } from 'antd';
+import { Table } from 'antd';
 // const columns = [
 //     {
 //         title: 'Name',
@@ -72,7 +72,6 @@ import { Space, Table, Tag } from 'antd';
 // ];
 
 const TableComponent = ({ dataTable }) => {
-    console.log(dataTable)
     return (
         <Table className='Table_component'
             columns={dataTable.columns}

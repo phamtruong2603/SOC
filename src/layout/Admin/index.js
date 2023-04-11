@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { Option_link } from '../../routes/adminRoutes.js';
+/* eslint-disable no-mixed-operators */
+import React, { useState, useEffect } from 'react';
+import { Admin_option } from '../../routes/adminRoutes.js';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Route, Routes, useNavigate, Link } from 'react-router-dom';
 const { Header, Content, Sider } = Layout;
 
-const items2 = Option_link.map((value, index) => {
+const Option = Admin_option.map((value, index) => {
     const key = value.id
     return {
         key: `${key}`,
@@ -11,28 +13,47 @@ const items2 = Option_link.map((value, index) => {
     };
 });
 
-const Render_Option = ({ id }) => {
-    if (!id)
-        return
-    const Render = Option_link[id].component
+const RenderOption = ({ id }) => {
+    if (!id) return
     return (
-        <Render />
+        <Routes>
+            {Admin_option.map((value, index) => {
+                const Render = value.component
+                return (
+                    <Route key={value.id}
+                        path={`/${value.path}`}
+                        element={<Render />}
+                    />
+                )
+            })}
+        </Routes>
     )
 }
 
 const Admin = () => {
+    const navigate = useNavigate()
     const [option, setOption] = useState();
     const onclick = (value) => {
         setOption({
             id: value.key,
-            name: Option_link[value.key].name,
-            path: Option_link[value.key].path,
+            name: Admin_option[value.key].name,
+            path: Admin_option[value.key].path,
         })
+        navigate(`${Admin_option[value.key].path}`)
     };
-    console.log(option)
     const {
         token: { colorBgContainer },
     } = theme.useToken();
+    console.log(option)
+    const item = [
+        { title: 'Admin' },
+        { title: <Link to={`${option && option.path}`}>{option && option.name}</Link> },
+    ]
+
+    useEffect(() => {
+        if (!option) navigate('/admin')
+    }, [option, navigate]);
+
     return (
         <Layout>
             <Header className="header">
@@ -41,18 +62,13 @@ const Admin = () => {
             <Layout>
                 <Sider
                     width={200}
-                    style={{
-                        background: colorBgContainer,
-                    }}
+                    style={{ background: colorBgContainer }}
                 >
                     <Menu
                         mode="inline"
                         onClick={onclick}
-                        style={{
-                            height: '100%',
-                            borderRight: 0,
-                        }}
-                        items={items2}
+                        style={{ height: '100%', borderRight: 0 }}
+                        items={Option}
                     />
                 </Sider>
                 <Layout
@@ -60,21 +76,15 @@ const Admin = () => {
                 >
                     <Breadcrumb
                         style={{ margin: '16px 0' }}
-                    >
-                        <Breadcrumb.Item>Admin</Breadcrumb.Item>
-                        <Breadcrumb.Item>{option && option.name}</Breadcrumb.Item>
-                    </Breadcrumb>
+                        items={item}
+                    />
+
                     <Content
                         style={{
-                            padding: 24,
-                            margin: 0,
-                            minHeight: 280,
-                            background: colorBgContainer,
+                            padding: 24, margin: 0,
+                            minHeight: 280, background: colorBgContainer,
                         }}>
-                        <Render_Option
-                            colorBgContainer
-                            id={option && option.id || null}
-                        />
+                        <RenderOption id={option && option.id || null} />
                     </Content>
                 </Layout>
             </Layout>

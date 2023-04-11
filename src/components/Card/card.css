@@ -1,0 +1,79 @@
+.CardProject {
+    width: 30%;
+    padding: 1rem;
+    border: 1px solid rgb(175, 172, 172);
+    border-radius: 10px;
+}
+
+.title_Project {
+    margin-bottom: 1rem;
+}
+
+.detail_Project div span,
+.title_Project>span {
+    display: block;
+}
+
+.title_Project .title_Project-name {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #25c8f1;
+}
+
+.title_Project .title_Project-process {
+    font-weight: 500;
+    color: #767575;
+}
+
+.title_Project .title_Project-process>span {
+    color: #2a2929;
+}
+
+.detail_Project>div {
+    margin: 0.5rem 0;
+}
+
+.detail_Project-header {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #767575;
+    /* margin: 0.3rem 0 !important; */
+}
+
+.detail_Project div span:nth-child(1) {
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.detail_Project-member>div {
+    display: flex;
+}
+
+.detail_Project-member>div>div {
+    margin-right: 5px;
+}
+
+.progress_Project-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.progress_Project-header span:nth-child(1) {
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.progress_load {
+    display: block;
+    border: 1px solid rgb(175, 172, 172);
+    border-radius: 10px;
+    width: 100%;
+    height: 10px;
+    overflow: hidden;
+}
+.progress_loading {
+    display: block;
+    height: 100%;
+    background-color: #25c8f1;
+}
