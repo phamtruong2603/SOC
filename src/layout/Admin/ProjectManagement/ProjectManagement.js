@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import './ProjectManagement.css';
 import CardProject from '../../../components/Card/CardProject';
+import Project from '../../../components/Project/Project';
 import AddProject from './AddProject';
 import { ProjectContexts } from '../../../api/ProjectContext';
 import { PlusOutlined } from '@ant-design/icons';
@@ -45,7 +46,6 @@ const ProjectManagementMain = () => {
                     let isSearch = false
                     const a = search.filter(val => val === value)
                     if (a.length) isSearch = true
-                    console.log(isSearch)
                     return (
                         <CardProject
                             isSearch={isSearch}
@@ -69,6 +69,10 @@ const ProjectManagement = () => {
             <Route
                 path="/addproject"
                 element={<AddProject />}
+            />
+            <Route
+                path="/:id"
+                element={<Project />}
             />
         </Routes>
     )

@@ -1,10 +1,18 @@
 import React from 'react';
 import './card.css';
 import Avatar from '../Avatar/Avatar';
+import { useNavigate } from 'react-router-dom';
 
 const CardProject = ({ value, isSearch }) => {
+    const navigate = useNavigate()
+    const onclick = (value) => {
+        navigate(`${value.id}`)
+    }
     return (
-        <div className={`CardProject ${isSearch ? 'isSearch' : ''}`}>
+        <div
+            className={`CardProject ${isSearch ? 'isSearch' : ''}`}
+            onClick={() => onclick(value)}
+        >
             <header className='title_Project'>
                 <span className='title_Project-name'>{value.name}</span>
                 <span className='title_Project-process'><span>{value.running}</span> đang chạy <span>{value.complete}</span> hoàn thành</span>

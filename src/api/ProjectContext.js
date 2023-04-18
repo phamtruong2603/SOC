@@ -90,6 +90,39 @@ const test = [
         running: 0,
         complete: 0
     },
+    {
+        id: 4,
+        name: "Project name 3",
+        deadline: "22/07/2001",
+        leader: {
+            id: 30,
+            name: "Nguyen Van C",
+            avatar: ""
+        },
+        member: [
+            {
+                id: 31,
+                name: "Nguyen Van C",
+                avatar: ""
+            }, {
+                id: 32,
+                name: "Nguyen Van C",
+                avatar: ""
+            },{
+                id: 33,
+                name: "Nguyen Van C",
+                avatar: ""
+            },
+            {
+                id: 34,
+                name: "Nguyen Van C",
+                avatar: ""
+            }
+        ],
+        progress: "10%",
+        running: 0,
+        complete: 0
+    },
 ]
 const ProjectContext = ({ children }) => {
     const [project, setProject] = useState(test)

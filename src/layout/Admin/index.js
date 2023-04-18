@@ -1,9 +1,9 @@
 /* eslint-disable no-mixed-operators */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Admin_option } from '../../routes/adminRoutes.js';
-import { ProjectContexts } from '../../api/ProjectContext.js';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import { Route, Routes, useNavigate, Link } from 'react-router-dom';
+// import { ProjectContexts } from '../../api/ProjectContext.js';
+import { Layout, Menu, theme } from 'antd';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 const { Header, Content, Sider } = Layout;
 
 const Option = Admin_option.map((value, index) => {
@@ -20,9 +20,7 @@ const RenderOption = ({ id }) => {
         <Routes>
             {Admin_option.map((value, index) => {
                 const Render = value.component
-                let path = `/${value.path}`
-                if (value.chidren)
-                    path = `/${value.path}/*`
+                let path = `/${value.path}/*`
                 return (
                     <Route key={value.id}
                         path={path}
@@ -35,8 +33,7 @@ const RenderOption = ({ id }) => {
 }
 
 const Admin = () => {
-    const { project } = useContext(ProjectContexts)
-    console.log(project)
+    // const { project } = useContext(ProjectContexts)
     const navigate = useNavigate()
     const [option, setOption] = useState();
     const onclick = (value) => {
@@ -50,11 +47,6 @@ const Admin = () => {
     const {
         token: { colorBgContainer },
     } = theme.useToken();
-    const item = [
-        { title: 'Admin' },
-        { title: <Link to={`${option && option.path}`}>{option && option.name}</Link> },
-        { title: '' }
-    ]
 
     useEffect(() => {
         if (!option) navigate('/admin')
@@ -77,20 +69,19 @@ const Admin = () => {
                         items={Option}
                     />
                 </Sider>
-                <Layout
-                    style={{ padding: '0 24px 24px', }}
-                >
-                    <Breadcrumb
-                        style={{ margin: '16px 0' }}
-                        items={item}
-                    />
-
+                <Layout style={{ padding: '0 24px 24px', }}>
+                    <Content
+                        style={{ padding: 10, fontSize: 20, fontWeight: "bold", color: '#5b5a5a' }}>
+                        {option && option.name || 'Tiêu đề'}
+                    </Content>
                     <Content
                         style={{
                             padding: 24, margin: 0,
                             minHeight: 280, background: colorBgContainer,
                         }}>
-                        <RenderOption id={option && option.id || null} />
+                        <RenderOption
+                            id={option && option.id || null}
+                        />
                     </Content>
                 </Layout>
             </Layout>
