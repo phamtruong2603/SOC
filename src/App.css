@@ -10,3 +10,6 @@
 .ant-spin-container>ul {
     display: none !important;
 }
+.hidden {
+    display: none;
+}

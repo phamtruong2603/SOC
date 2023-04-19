@@ -9,10 +9,10 @@ const Project = () => {
     useEffect(() => {
         const proj = project.filter((value) => Number(id) === value.id)
         setData(proj)
-    },[id, project])
+    }, [id, project])
     console.log(data)
     return (
-        <div>Project</div>
+        <>Project</>
     )
 }
 

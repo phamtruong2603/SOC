@@ -1,0 +1,63 @@
+.ProfileMain {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid rgb(217, 214, 214);
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.ProfileMain_header {
+    display: flex;
+}
+
+.ProfileMain_header>div:nth-child(2) {
+    padding-left: 20px;
+    align-items: center;
+}
+
+.ProfileMain_header>div>span {
+    display: block;
+}
+
+.ProfileMain_header>div>span:nth-child(1) {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.editButton {
+    display: flex;
+    align-items: center;
+}
+.editDetailButton {
+    padding-top: 1.2rem;
+}
+
+.editDetailButton button,
+.editButton button {
+    padding: 10px 25px;
+    border-radius: 10px;
+    border: none;
+}
+
+.PersionalInformation {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.PersionalInformation_detail {
+    padding: 20px 10px;
+}
+
+.PersionalInformation_detail span {
+    display: block;
+}
+
+.PersionalInformation_detail span:nth-child(1) {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgb(89, 89, 90);
+}

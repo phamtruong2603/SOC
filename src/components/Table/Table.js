@@ -1,11 +1,36 @@
 import { Table } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
-const TableComponent = ({ dataTable }) => {
+const TableComponent = ({ dataTable, click }) => {
+    const navigate = useNavigate()
+    const dataSource = [...dataTable.data]
+    const handleNavigate = (id) => {
+        navigate(`${id}`)
+    };
+    let defaultColumns
+    if (click) {
+        defaultColumns = [
+            ...dataTable.columns,
+            {
+                title: '',
+                dataIndex: '',
+                render: (_, record) =>
+                    dataSource.length > 0 ? (
+                        <button onClick={() => handleNavigate(record.id)}>Chi tiết</button>
+                    ) : null,
+            }
+        ]
+    } else {
+        defaultColumns = [...dataTable.columns]
+    }
+
     return (
-        <Table className='Table_component'
-            columns={dataTable.columns}
-            dataSource={dataTable.data}
-        />
-    )
+        <div>
+            <Table
+                dataSource={dataSource}
+                columns={defaultColumns}
+            />
+        </div>
+    );
 }
 export default TableComponent;

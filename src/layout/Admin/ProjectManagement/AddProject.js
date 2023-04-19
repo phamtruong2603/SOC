@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Button, DatePicker, Form, Input, Select } from 'antd';
-import { userData } from '../../../api/testData';
+import { memberData } from '../../../api/testData';
 
 const AddProject = () => {
-  console.log(userData)
+  console.log(memberData)
   const [data, setData] = useState()
-  const options = userData.map((user) => {
+  const options = memberData.map((user) => {
     return ({
       value: user.id,
       label: user.name,
@@ -52,7 +52,7 @@ const AddProject = () => {
 
       <Form.Item label="Member">
         <Select>
-          {userData.map((user) => <Select.Option key={user.id} value={user.id}>{user.name}</Select.Option>)}
+          {memberData.map((user) => <Select.Option key={user.id} value={user.id}>{user.name}</Select.Option>)}
         </Select>
       </Form.Item>
 

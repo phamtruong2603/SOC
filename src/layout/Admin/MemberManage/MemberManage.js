@@ -1,5 +1,9 @@
 import React from 'react';
 import TableComponent from '../../../components/Table/Table';
+import { Route, Routes } from 'react-router-dom';
+import ProfileMain from '../../../components/Profile/ProfileMain';
+import { memberData } from '../../../api/testData';
+
 const dataTable = {
     columns: [
         {
@@ -18,53 +22,53 @@ const dataTable = {
             key: 'name',
         },
         {
-            title: 'Nhiệm vụ',
-            dataIndex: 'task',
-            key: 'task',
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email',
         },
         {
-            title: 'Hoàn thành',
-            dataIndex: 'complete',
-            key: 'complete',
+            title: 'Ngày sinh',
+            dataIndex: 'dateOfBirth',
+            key: 'dateOfBirth',
         },
         {
-            title: 'Hoàn thành',
-            dataIndex: 'complete',
-            key: 'complete',
+            title: 'Team',
+            dataIndex: 'team',
+            key: 'team',
         },
     ],
-    data: [
-        {
-            key: '1',
-            id: '1',
-            avatar: '0',
-            name: 'abc abc  abc',
-            task: '15',
-            complete: '0'
-        },
-        {
-            key: '2',
-            id: '2',
-            avatar: 42,
-            name: 'bcd bcd bcd',
-            task: '10',
-            complete: '0'
-        },
-        {
-            key: '3',
-            id: '3',
-            avatar: 32,
-            name: 'def def def',
-            task: '20',
-            complete: '0'
-        },
-    ]
+    data: memberData.map(value => ({
+        id: value.id,
+        avatar: value.avatar,
+        name: value.name,
+        email: value.email,
+        dateOfBirth: value.dateOfBirth,
+        team: value.team
+    }))
 }
-const MemberManage = () => {
+const MainMemberManage = () => {
     return (
         <div>
-            <TableComponent dataTable={dataTable} />
+            <TableComponent
+                dataTable={dataTable}
+                click={true}
+            />
         </div>
+    )
+}
+
+const MemberManage = () => {
+    return (
+        <Routes>
+            <Route
+                path="/"
+                element={<MainMemberManage />}
+            />
+            <Route
+                path="/:id"
+                element={<ProfileMain />}
+            />
+        </Routes>
     )
 }
 
