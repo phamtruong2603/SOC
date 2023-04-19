@@ -1,6 +1,7 @@
 import Statistical from "../layout/Admin/Statistical/Statistical";
 import ProjectManagement from "../layout/Admin/ProjectManagement/ProjectManagement";
 import MemberManage from "../layout/Admin/MemberManage/MemberManage";
+import CreateAccount from "../layout/Admin/CreateAccount/CreateAccount";
 import Profile from "../layout/Admin/Profile/Profile";
 
 // const a = [1, 1, 3]
@@ -28,7 +29,7 @@ export const Admin_option = [
         id: 3,
         name: 'Tạo tài khoản',
         path: 'createaccount',
-        component: () => <></>,
+        component: CreateAccount,
     },
     {
         id: 4,

@@ -1,28 +1,25 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Protected from "./Protected.js";
-// import Admin from "../layout/Admin/index.js";
+import Home from "../layout/Login/index.js";
 import Admin from "../layout/Admin/index.js";
+import User from "../layout/User/index.js";
 
 export default (
     <Routes>
-        {/* <Route
+        <Route
             path="/"
             element={<Home />}
-        /> */}
-        {/* <Route
-            path="/login"
-            element={<Login />}
-        /> */}
+        />
         <Route element={<Protected />}>
             <Route
                 path="/admin/*"
                 element={<Admin />}
             />
-            {/* <Route
+            <Route
                 path="/dashboard"
-                element={< />}
-            /> */}
+                element={<User />}
+            />
         </Route>
     </Routes>
 )

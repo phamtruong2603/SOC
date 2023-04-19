@@ -3,11 +3,11 @@ import { Button, DatePicker, Form, Input, Select } from 'antd';
 import { memberData } from '../../../api/testData';
 
 const AddProject = () => {
-  console.log(memberData)
   const [data, setData] = useState()
   const options = memberData.map((user) => {
+    let key = user.id
     return ({
-      value: user.id,
+      value: key,
       label: user.name,
     })
   })
@@ -30,8 +30,6 @@ const AddProject = () => {
     <Form
       labelCol={{ span: 4 }}
       wrAddProjecterCol={{ span: 14 }}
-      // layout="horizontal"
-
       style={{ maxWidth: 600 }}
     >
       <Form.Item label="Name Project">
