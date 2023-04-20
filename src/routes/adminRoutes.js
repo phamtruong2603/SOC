@@ -4,8 +4,6 @@ import MemberManage from "../layout/Admin/MemberManage/MemberManage";
 import CreateAccount from "../layout/Admin/CreateAccount/CreateAccount";
 import Profile from "../layout/Admin/Profile/Profile";
 
-// const a = [1, 1, 3]
-
 export const Admin_option = [
     {
         id: 0,

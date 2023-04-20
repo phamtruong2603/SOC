@@ -3,13 +3,14 @@ import './ProfileMain.css';
 import Avatar from '../Avatar/Avatar';
 import { UserContexts } from '../../api/UserContext';
 import { EditOutlined } from '@ant-design/icons';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { memberData } from '../../api/testData';
 
 const ProfileMain = () => {
   let { id } = useParams()
   const { user } = useContext(UserContexts);
-  const [data, setData] = useState()
+  const [data, setData] = useState();
+  const navigate = useNavigate()
   useEffect(() => {
     if (id) {
       const newData = memberData.filter(value => {
@@ -20,6 +21,9 @@ const ProfileMain = () => {
       setData(user)
     }
   }, [id, user])
+  const updateData = (id) => {
+    navigate(`update/${id}`)
+  }
   if (!data) return
   return (
     <div>
@@ -73,7 +77,7 @@ const ProfileMain = () => {
           </div>
         </div>
         <div className={`${!user.isAdmin ? 'hidden' : 'editDetailButton'}`}>
-          <button><EditOutlined />Edit</button>
+          <button onClick={() => updateData(data.id)}><EditOutlined />Edit</button>
         </div>
       </div>
     </div>

@@ -1,11 +1,20 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import ProfileMain from '../../../components/Profile/ProfileMain';
+import UpdateProfile from '../../../components/Profile/UpdateProfile';
 
 const Profile = () => {
     return (
-        <div>
-            <ProfileMain />
-        </div>
+        <Routes>
+            <Route
+                path="/"
+                element={<ProfileMain />}
+            />
+            <Route
+                path="/update/:id"
+                element={<UpdateProfile />}
+            />
+        </Routes>
     )
 }
 
