@@ -17,7 +17,7 @@ export default (
                 element={<Admin />}
             />
             <Route
-                path="/dashboard"
+                path="/dashboard/*"
                 element={<User />}
             />
         </Route>

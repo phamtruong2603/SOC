@@ -15,20 +15,20 @@ export const userData = {
 export const projectData = [
     {
         id: 0,
-        name: "Project name 3",
+        name: "Project name 1",
         deadline: "",
-        leader: [],
-        member: [],
+        leader: [1],
+        member: [1, 2, 3, 4],
         progress: "10%",
         running: 0,
         complete: 0
     },
     {
         id: 1,
-        name: "Project name 3",
+        name: "Project name 2",
         deadline: "",
-        leader: [],
-        member: [],
+        leader: [1],
+        member: [1, 2, 3],
         progress: "10%",
         running: 0,
         complete: 0
@@ -37,8 +37,8 @@ export const projectData = [
         id: 2,
         name: "Project name 3",
         deadline: "",
-        leader: [],
-        member: [],
+        leader: [1],
+        member: [1, 2, 3],
         progress: "10%",
         running: 0,
         complete: 0

@@ -32,7 +32,7 @@ const CardProject = ({ value, isSearch }) => {
                     <div>
                         {value.member.map((value, index) => {
                             return (
-                                <div key={value.id}><Avatar circle="40px" /></div>
+                                <div key={index}><Avatar circle="40px" /></div>
                             )
                         })}
                     </div>

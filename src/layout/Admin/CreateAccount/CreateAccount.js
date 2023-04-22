@@ -13,7 +13,6 @@ const CreateAccount = () => {
     })
   }
   const submit = () => {
-    console.log(data)
   }
 
   return (
