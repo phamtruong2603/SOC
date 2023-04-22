@@ -86,4 +86,5 @@ const Admin = () => {
         </Layout>
     );
 };
+
 export default Admin;
