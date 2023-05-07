@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, DatePicker, Form, Input, Select } from 'antd';
 import axios from 'axios';
+import { MessageContexts } from '../../../components/Message/Message';
+import { useNavigate } from 'react-router-dom';
 
 const AddProject = () => {
   const [data, setData] = useState()
-
+  const { messagesuccess, messageerror } = useContext(MessageContexts)
   const [options, setOptions] = useState([])
+  const navigate = useNavigate()
   const handleChange = (value) => {
     setData({
       ...data,
@@ -58,10 +61,11 @@ const AddProject = () => {
     try {
       const token = localStorage.getItem('token');
       axios.defaults.headers.common['Auth'] = `${token}`;
-      const res = await axios.post("http://localhost:8080/api/project/create/", data)
-      console.log(res)
+      await axios.post("http://localhost:8080/api/project/create/", data)
+      messagesuccess()
+      navigate('/admin/projectmanagement')
     } catch (error) {
-
+      messageerror()
     }
   }
   return (

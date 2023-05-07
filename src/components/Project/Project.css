@@ -1,3 +1,9 @@
 .addTask {
     display: block;
 }
+.viewTask {
+    margin-top: 2rem;
+}
+.viewTask h2 {
+    margin: 0.5rem 0;
+}

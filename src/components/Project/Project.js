@@ -1,20 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './Project.css';
-import { ProjectContexts } from '../../api/ProjectContext.js';
 import { useParams } from 'react-router-dom';
 import { Button, DatePicker, Form, Input, Select, Tabs } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import TableComponent from '../Table/Table';
+import { MessageContexts } from '../Message/Message';
 
 const Task = ({ id }) => {
+    const { messagesuccess, messageerror } = useContext(MessageContexts)
     const [hidden, setHidden] = useState(false)
     const [listTask, setListTask] = useState([])
     const [data, setData] = useState({
         projectId: Number(id)
     })
     const [options, setOptions] = useState([])
-
+    const projectId = { "projectId": Number(id) }
     const addTask = () => setHidden(!hidden)
     const setPrams = (e) => {
         let name = e.target.name
@@ -38,14 +39,18 @@ const Task = ({ id }) => {
     };
     const submit = async (e) => {
         e.preventDefault()
-        console.log(data)
         try {
             const token = localStorage.getItem('token');
             axios.defaults.headers.common['Auth'] = `${token}`;
-            const res = await axios.post("http://localhost:8080/api/task/create/", data)
-            console.log(res)
+            await axios.post("http://localhost:8080/api/task/create/", data)
+            messagesuccess()
+            const resProject = await axios.post("http://localhost:8080/api/task/view-all-tasks/", projectId)
+            setListTask(resProject.data)
+            setData({
+                projectId: Number(id)
+            })
         } catch (error) {
-
+            messageerror()
         }
     }
     const dataTable = {
@@ -83,21 +88,20 @@ const Task = ({ id }) => {
         ],
         data: listTask.map((value) => ({
             name: value.name,
-            startDate: value.setData,
+            startDate: value.startDate,
             deadline: value.deadline,
             complete: value.complete,
             member: value.member,
             status: value.status
         }))
     }
-    console.log(listTask)
     useEffect(() => {
         (async () => {
             try {
-                const projectId = { "projectId": Number(id) }
                 const token = localStorage.getItem('token');
                 axios.defaults.headers.common['Auth'] = `${token}`;
-                const res = await axios.post("http://localhost:8080/api/user/list-user")
+                const res = await axios.post("http://localhost:8080/api/user/list-user-by-projectId", projectId)
+                console.log(res)
                 const resProject = await axios.post("http://localhost:8080/api/task/view-all-tasks/", projectId)
                 setListTask(resProject.data)
                 const newData = res.data.map((user) => {
@@ -108,7 +112,6 @@ const Task = ({ id }) => {
                     })
                 })
                 setOptions(newData)
-
             } catch (error) {
 
             }
@@ -149,7 +152,8 @@ const Task = ({ id }) => {
                     <Button onClick={submit}>Lưu Task</Button>
                 </Form>
             </div>
-            <div>
+            <div className='viewTask'>
+                <h2>Danh sách công việc</h2>
                 <TableComponent
                     dataTable={dataTable}
                     click={true}
@@ -159,7 +163,7 @@ const Task = ({ id }) => {
     )
 }
 
-const Children = ({ value, data, id }) => {
+const Children = ({ value, id }) => {
     if (value === 'Công việc') {
         return <Task id={id} />
     }
@@ -167,12 +171,6 @@ const Children = ({ value, data, id }) => {
 
 const Project = () => {
     let { id } = useParams()
-    const { project } = useContext(ProjectContexts);
-    const [data, setData] = useState()
-    useEffect(() => {
-        const proj = project.filter((value) => Number(id) === value.id)
-        setData(...proj)
-    }, [id, project])
 
     const items = ['Công việc', 'Thời gian', 'Thành viên'].map((value, index) => {
         return {
@@ -182,7 +180,6 @@ const Project = () => {
                 <Children
                     id={id}
                     value={value}
-                    data={data}
                 />,
         }
     })

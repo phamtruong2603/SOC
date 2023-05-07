@@ -15,7 +15,7 @@ const CardProject = ({ value, isSearch }) => {
         >
             <header className='title_Project'>
                 <span className='title_Project-name'>{value.name}</span>
-                <span className='title_Project-process'><span>{value.running}</span> đang chạy <span>{value.complete}</span> hoàn thành</span>
+                {/* <span className='title_Project-process'><span>{value.running}</span> đang chạy <span>{value.complete}</span> hoàn thành</span> */}
             </header>
             <div className='detail_Project'>
                 <div className='detail_Project-header'>Chi tiết: </div>

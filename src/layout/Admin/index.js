@@ -1,9 +1,11 @@
 /* eslint-disable no-mixed-operators */
 import React, { useState, useEffect } from 'react';
 import { Admin_option } from '../../routes/adminRoutes.js';
+import HeaderMain from '../../components/Header/Header.js';
 import { Layout, Menu, theme } from 'antd';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-const { Header, Content, Sider } = Layout;
+
+const { Content, Sider } = Layout;
 
 const Option = Admin_option.map((value, index) => {
     const key = value.id
@@ -53,9 +55,7 @@ const Admin = () => {
 
     return (
         <Layout>
-            <Header className="header">
-                abc
-            </Header>
+            <HeaderMain />
             <Layout>
                 <Sider
                     width={200}

@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import { Button, Form, Input } from 'antd';
+import React, { useContext, useState } from 'react';
+import { Button, DatePicker, Form, Input } from 'antd';
+import axios from 'axios';
+import { MessageContexts } from '../../../components/Message/Message';
 
 const CreateAccount = () => {
   const [data, setData] = useState()
-
+  const {messagesuccess, messageerror} = useContext(MessageContexts)
+  
   const setPrams = (e) => {
     let name = e.target.name
     let value = e.target.value
@@ -12,7 +15,23 @@ const CreateAccount = () => {
       [name]: value,
     })
   }
-  const submit = () => {
+  const onChange = (date, dateString) => {
+    setData({
+      ...data,
+      "dob": dateString,
+    })
+  };
+  const submit = async (e) => {
+    e.preventDefault()
+    
+    try {
+      const token = localStorage.getItem('token');
+      axios.defaults.headers.common['Auth'] = `${token}`;
+      await axios.post("http://localhost:8080/api/auth/register/", data)
+      messagesuccess()
+    } catch (error) {
+      messageerror()
+    }
   }
 
   return (
@@ -22,34 +41,34 @@ const CreateAccount = () => {
       style={{ maxWidth: 600 }}
       layout="horizontal"
     >
-      <Form.Item label="Name">
-        <Input name='name' onChange={setPrams} />
+      <Form.Item label="username">
+        <Input name='username' onChange={setPrams} />
       </Form.Item>
 
-      <Form.Item label="Full Name">
-        <Input name='fullName' onChange={setPrams} />
+      <Form.Item label="full name">
+        <Input name='fullname' onChange={setPrams} />
       </Form.Item>
 
-      <Form.Item label="Country">
-        <Input name='contry' onChange={setPrams} />
+      <Form.Item label="country">
+        <Input name='country' onChange={setPrams} />
       </Form.Item>
 
-      <Form.Item label="Date Of Birth">
-        <Input name='dateOfBirth' onChange={setPrams} />
+      <Form.Item label="Deadline">
+        <DatePicker onChange={onChange} />
       </Form.Item>
       <Form.Item label="Phone Number">
         <Input name='phone' onChange={setPrams} />
       </Form.Item>
 
-      <Form.Item label="Email">
+      <Form.Item label="email">
         <Input name='email' onChange={setPrams} />
       </Form.Item>
 
-      <Form.Item label="Team">
-        <Input name='team' onChange={setPrams} />
+      <Form.Item label="password">
+        <Input name='password' onChange={setPrams} />
       </Form.Item>
 
-      <Button onClick={submit}>Button</Button>
+      <Button onClick={submit}>Tạo tài khoản</Button>
     </Form>
   );
 }

@@ -4,19 +4,28 @@ import Avatar from '../Avatar/Avatar';
 import { UserContexts } from '../../api/UserContext';
 import { EditOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
-import { memberData } from '../../api/testData';
+import axios from 'axios';
+import { MessageContexts } from '../Message/Message';
 
 const ProfileMain = () => {
+  const { messageerror } = useContext(MessageContexts)
   let { id } = useParams()
   const { user } = useContext(UserContexts);
   const [data, setData] = useState();
   const navigate = useNavigate()
   useEffect(() => {
     if (id) {
-      const newData = memberData.filter(value => {
-        return value.id === Number(id)
-      })
-      setData(...newData)
+      (async () => {
+        try {
+          const userId = { "userId": id }
+          const token = localStorage.getItem('token');
+          axios.defaults.headers.common['Auth'] = `${token}`;
+          const res = await axios.post("http://localhost:8080/api/user/get-by-id", userId)
+          setData(res.data)
+        } catch (error) {
+          messageerror()
+        }
+      })()
     } else {
       setData(user)
     }
@@ -24,6 +33,7 @@ const ProfileMain = () => {
   const updateData = (id) => {
     navigate(`update/${id}`)
   }
+  console.log(data)
   if (!data) return
   return (
     <div>
@@ -31,7 +41,7 @@ const ProfileMain = () => {
         <div className='ProfileMain_header'>
           <Avatar circle={'100px'} />
           <div className='ProfileMain_name'>
-            <span>{data.name}</span>
+            <span>{data.userName}</span>
             <span>{data.dateOfBirth || '01/01/1010'}</span>
           </div>
         </div>
@@ -46,7 +56,7 @@ const ProfileMain = () => {
           <div className='PersionalInformation_left'>
             <div className='PersionalInformation_detail'>
               <span>Name</span>
-              <span>{data.name || 'name'}</span>
+              <span>{data.userName || 'name'}</span>
             </div>
             <div className='PersionalInformation_detail'>
               <span>Email</span>
@@ -57,14 +67,14 @@ const ProfileMain = () => {
               <span>{data.contry || 'Viet Nam'}</span>
             </div>
             <div className='PersionalInformation_detail'>
-              <span>Team</span>
-              <span>{data.team || 'Lập trình hướng dịch vụ'}</span>
+              <span>Phone</span>
+              <span>{data.phone || 'Lập trình hướng dịch vụ'}</span>
             </div>
           </div>
           <div className='PersionalInformation_right'>
             <div className='PersionalInformation_detail'>
               <span>Full Name</span>
-              <span>{data.fullName || 'full name'}</span>
+              <span>{data.fullname || 'full name'}</span>
             </div>
             <div className='PersionalInformation_detail'>
               <span>Phone</span>

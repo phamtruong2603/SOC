@@ -1,0 +1,61 @@
+.homeToolbarNav {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.homeToolbarNav li {
+    list-style: none;
+}
+
+.headerHome {
+    background-color: white;
+    margin-bottom: 1.5rem;
+}
+
+.headerHome nav {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.homeNav li {
+    padding-right: 20px;
+    display: flex;
+}
+
+.homeNav h2 {
+    padding-left: 20px;
+}
+
+.navLiHome {
+    text-decoration: none;
+    text-transform: uppercase;
+    position: relative;
+    color: white;
+}
+
+/*// */
+.signin {
+    color: rgb(15, 15, 15);
+    background: rgb(207, 206, 206);
+}
+
+.in {
+    border: 1.5px solid white;
+    margin: 0 3px;
+    font-weight: 500;
+    padding: 10px 30px;
+    border-radius: 10px;
+    text-decoration: none;
+    line-height: 65px;
+}
+
+.in:hover {
+    padding: 11px 30px 9px 30px;
+}
+.avatarHeader{
+    display: flex;
+    align-items: center;
+}
