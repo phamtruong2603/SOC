@@ -5,15 +5,18 @@ import { Button, DatePicker, Form, Input, Select, Tabs } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import TableComponent from '../Table/Table';
+import { UserContexts } from '../../api/UserContext';
 import { MessageContexts } from '../Message/Message';
 
 const Task = ({ id }) => {
+    const { user } = useContext(UserContexts)
     const { messagesuccess, messageerror } = useContext(MessageContexts)
     const [hidden, setHidden] = useState(false)
     const [listTask, setListTask] = useState([])
     const [data, setData] = useState({
         projectId: Number(id)
     })
+    const text = user.admin ? "chi tiết" : "nộp file"
     const [options, setOptions] = useState([])
     const projectId = { "projectId": Number(id) }
     const addTask = () => setHidden(!hidden)
@@ -56,6 +59,11 @@ const Task = ({ id }) => {
     const dataTable = {
         columns: [
             {
+                title: 'id',
+                dataIndex: 'id',
+                key: 'id',
+            },
+            {
                 title: 'Tên task',
                 dataIndex: 'name',
                 key: 'name',
@@ -87,6 +95,7 @@ const Task = ({ id }) => {
             },
         ],
         data: listTask.map((value) => ({
+            id:value.id,
             name: value.name,
             startDate: value.startDate,
             deadline: value.deadline,
@@ -119,9 +128,12 @@ const Task = ({ id }) => {
     }, [])
     return (
         <div>
-            <div className='Add_ProjectManagement'>
-                <button onClick={addTask}><PlusOutlined style={{ fontWeight: 700 }} /> Thêm</button>
-            </div>
+            {user.admin ?
+                <div className='Add_ProjectManagement'>
+                    <button onClick={addTask}><PlusOutlined style={{ fontWeight: 700 }} /> Thêm</button>
+                </div> :
+                <></>
+            }
             <div className={`${hidden ? 'addTask' : 'hidden'}`}>
                 <Form
                     labelCol={{ span: 4 }}
@@ -157,6 +169,7 @@ const Task = ({ id }) => {
                 <TableComponent
                     dataTable={dataTable}
                     click={true}
+                    text={text}
                 />
             </div>
         </div>

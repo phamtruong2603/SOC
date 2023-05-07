@@ -16,31 +16,6 @@ export const Admin_option = [
         name: 'Quản lý dự án',
         path: 'projectmanagement',
         component: ProjectManagement,
-        children: [
-            {
-                id: 10,
-                name: 'Tạo project mới',
-                path: 'createproject',
-                component: () => <></>
-            },
-            [
-                {
-                    id: 11,
-                    path: '',
-                    component: () => <></>
-                },
-                {
-                    id: 12,
-                    path: '',
-                    component: () => <></>
-                },
-                {
-                    id: 13,
-                    path: '',
-                    component: () => <></>
-                },
-            ]
-        ]
     },
     {
         id: 2,

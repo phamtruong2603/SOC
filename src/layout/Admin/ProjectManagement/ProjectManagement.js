@@ -7,11 +7,14 @@ import { ProjectContexts } from '../../../api/ProjectContext';
 import { PlusOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import { UserContexts } from '../../../api/UserContext';
 import axios from 'axios';
 const { Search } = Input;
 
-const ProjectManagementMain = () => {
+export const ProjectManagementMain = () => {
     const { project, setProject } = useContext(ProjectContexts);
+    const { user } = useContext(UserContexts)
+    console.log(user)
     const navigate = useNavigate()
     const [search, setSearch] = useState([]);
     const addProject = () => {
@@ -50,9 +53,12 @@ const ProjectManagementMain = () => {
                         style={{ width: 300 }}
                     />
                 </div>
-                <div className='Add_ProjectManagement'>
-                    <button onClick={addProject}><PlusOutlined style={{ fontWeight: 700 }} /> Thêm</button>
-                </div>
+                {user.admin ?
+                    <div className='Add_ProjectManagement'>
+                        <button onClick={addProject}><PlusOutlined style={{ fontWeight: 700 }} /> Thêm</button>
+                    </div> :
+                    <></>
+                }
             </header>
             <div className='body_ProjectManagement'>
                 {project.map((value, index) => {
