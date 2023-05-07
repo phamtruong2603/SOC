@@ -1,17 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, DatePicker, Form, Input, Select } from 'antd';
-import { memberData } from '../../../api/testData';
+import axios from 'axios';
 
 const AddProject = () => {
   const [data, setData] = useState()
-  const options = memberData.map((user) => {
-    let key = user.id
-    return ({
-      value: key,
-      label: user.name,
+
+  const [options, setOptions] = useState([])
+  const handleChange = (value) => {
+    setData({
+      ...data,
+      "members": value
     })
-  })
-  console.log(options)
+  };
+  const handleChangeLead = (value) => {
+    setData({
+      ...data,
+      "leader": value
+    })
+  };
+  useEffect(() => {
+    (async () => {
+      try {
+        const token = localStorage.getItem('token');
+        axios.defaults.headers.common['Auth'] = `${token}`;
+        const res = await axios.post("http://localhost:8080/api/user/list-user")
+        const newData = res.data.map((user) => {
+          let key = user.id
+          return ({
+            value: key,
+            label: user.userName,
+          })
+        })
+        setOptions(newData)
+
+      } catch (error) {
+
+      }
+    })()
+  }, [])
+
   const setPrams = (e) => {
     let name = e.target.name
     let value = e.target.value
@@ -26,6 +53,17 @@ const AddProject = () => {
       "deadline": dateString,
     })
   };
+  const submit = async (e) => {
+    e.preventDefault()
+    try {
+      const token = localStorage.getItem('token');
+      axios.defaults.headers.common['Auth'] = `${token}`;
+      const res = await axios.post("http://localhost:8080/api/project/create/", data)
+      console.log(res)
+    } catch (error) {
+
+    }
+  }
   return (
     <Form
       labelCol={{ span: 4 }}
@@ -38,37 +76,30 @@ const AddProject = () => {
 
       <Form.Item label="Leader">
         <Select
+          onChange={handleChangeLead}
           allowClear
-          options={[
-            {
-              value: 'lucy',
-              label: 'Lucy',
-            },
-          ]}
+          options={options}
         />
       </Form.Item>
 
       <Form.Item label="Member">
-        <Select>
-          {memberData.map((user) => <Select.Option key={user.id} value={user.id}>{user.name}</Select.Option>)}
-        </Select>
+        <Select
+          mode="multiple"
+          allowClear
+          style={{
+            width: '100%',
+          }}
+          placeholder="Please select"
+          onChange={handleChange}
+          options={options}
+        />
       </Form.Item>
 
       <Form.Item label="Deadline">
         <DatePicker onChange={onChange} />
       </Form.Item>
 
-      <Form.Item label="Progress">
-        <Input name='progress' onChange={setPrams} />
-      </Form.Item>
-      <Form.Item label="Running">
-        <Input name='running' onChange={setPrams} />
-      </Form.Item>
-      <Form.Item label="Complete">
-        <Input name='complete' onChange={setPrams} />
-      </Form.Item>
-
-      <Button>Button</Button>
+      <Button onClick={submit}>Button</Button>
     </Form>
   );
 };

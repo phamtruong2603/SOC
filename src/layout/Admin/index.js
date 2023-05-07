@@ -35,6 +35,7 @@ const Admin = () => {
     const navigate = useNavigate()
     const [option, setOption] = useState();
     const onclick = (value) => {
+        // filter
         setOption({
             id: value.key,
             name: Admin_option[value.key].name,

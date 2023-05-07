@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import './index.css'
+import axios from 'axios';
 import Facebook from '../../public/image/facebook.png'
 import Google from '../../public/image/google.png'
 import Github from '../../public/image/github.png'
 import { UserContexts } from '../../api/UserContext';
 import { useNavigate } from 'react-router-dom';
-import { memberData } from '../../api/testData';
 
 const Home = () => {
   const [data, setData] = useState();
@@ -19,17 +19,21 @@ const Home = () => {
       [name]: value,
     })
   }
-  if (user && user.isAdmin) {
+  if (user && user.admin) {
     navigate('/admin')
   }
-  if (user && !user.isAdmin) {
+  if (user && !user.admin) {
     navigate('/dashboard')
   }
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
-    const newData = memberData.filter(value => (value.phone === data.phone))
-    if (newData.length) {
-      setUser(...newData)
+    try {
+      const respont = await axios.post("http://localhost:8080/api/auth/login", data)
+      localStorage.setItem('token', respont.data.token);
+      setUser(respont.data)
+
+    } catch (error) {
+      console.log("faaaa")
     }
   }
 
@@ -66,7 +70,7 @@ const Home = () => {
         </div>
         <div className='rightLogin'>
           <form onSubmit={submit}>
-            <input type='text' placeholder='usename' name="phone" onChange={setPrams} />
+            <input type='text' placeholder='email' name="email" onChange={setPrams} />
             <input type='password' placeholder='password' name='password' onChange={setPrams} />
             <button type="submit" >Login</button>
           </form>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './ProjectManagement.css';
 import CardProject from '../../../components/Card/CardProject';
 import Project from '../../../components/Project/Project';
@@ -7,10 +7,11 @@ import { ProjectContexts } from '../../../api/ProjectContext';
 import { PlusOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const { Search } = Input;
 
 const ProjectManagementMain = () => {
-    const { project } = useContext(ProjectContexts);
+    const { project, setProject } = useContext(ProjectContexts);
     const navigate = useNavigate()
     const [search, setSearch] = useState([]);
     const addProject = () => {
@@ -23,6 +24,18 @@ const ProjectManagementMain = () => {
         })
         setSearch(data)
     }
+    useEffect(() => {
+        (async () => {
+            try {
+                const token = localStorage.getItem('token');
+                axios.defaults.headers.common['Auth'] = `${token}`;
+                const res = await axios.post("http://localhost:8080/api/project/get-all/")
+                setProject(res.data)
+            } catch (error) {
+
+            }
+        })()
+    }, [])
     return (
         <div>
             <header className='header_ProjectManagement'>

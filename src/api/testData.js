@@ -9,7 +9,7 @@ export const userData = {
     password: "111111",
     contry: null,
     dateOfBirth: null,
-    team: null
+    team: null,
 }
 
 export const projectData = [
@@ -17,10 +17,10 @@ export const projectData = [
         id: 0,
         name: "Project name 1",
         deadline: "",
-        leader: [1],
-        member: [1, 2, 3, 4],
-        progress: "10%",
-        running: 0,
+        leader: [1], //userId
+        member: [1, 2, 3, 4], //[userId]
+        progress: "20%",
+        running: 5,
         complete: 0
     },
     {
@@ -30,7 +30,7 @@ export const projectData = [
         leader: [1],
         member: [1, 2, 3],
         progress: "10%",
-        running: 0,
+        running: 5,
         complete: 0
     },
     {
@@ -40,7 +40,7 @@ export const projectData = [
         leader: [1],
         member: [1, 2, 3],
         progress: "10%",
-        running: 0,
+        running: 5,
         complete: 0
     }
 
@@ -100,3 +100,11 @@ export const memberData = [
         team: null
     },
 ]
+
+export const jobData = {
+    id: 0,
+    name: "",
+    complete: false,
+    deadline: '',
+    projectId: 1,
+}
