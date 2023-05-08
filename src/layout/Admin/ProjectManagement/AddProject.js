@@ -102,8 +102,7 @@ const AddProject = () => {
       <Form.Item label="Deadline">
         <DatePicker onChange={onChange} />
       </Form.Item>
-
-      <Button onClick={submit}>Button</Button>
+      <Button onClick={submit} style={{ backgroundColor: "#25c8f1", color: "white", marginLeft: "2rem" }}>Thêm dự án</Button>
     </Form>
   );
 };

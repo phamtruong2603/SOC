@@ -1,12 +1,26 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './Project.css';
-import { useParams } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 import { Button, DatePicker, Form, Input, Select, Tabs } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import TableComponent from '../Table/Table';
 import { UserContexts } from '../../api/UserContext';
 import { MessageContexts } from '../Message/Message';
+import Avatar from '../Avatar/Avatar';
+import ViewTask from './Task.js';
+const ListTask = ({ dataTable, text }) => {
+
+    return (
+        <>
+            <h2>Danh sách công việc</h2>
+            <TableComponent
+                dataTable={dataTable}
+                click={true}
+                text={text}
+            /></>
+    )
+}
 
 const Task = ({ id }) => {
     const { user } = useContext(UserContexts)
@@ -59,43 +73,43 @@ const Task = ({ id }) => {
     const dataTable = {
         columns: [
             {
-                title: 'id',
+                title: 'Id',
                 dataIndex: 'id',
                 key: 'id',
             },
             {
-                title: 'Tên task',
+                title: 'Tên công việc',
                 dataIndex: 'name',
                 key: 'name',
             },
             {
-                title: 'start date',
+                title: 'Ngày bắt đầu',
                 dataIndex: 'startDate',
                 key: 'startDate',
             },
             {
-                title: 'deaadline',
+                title: 'Ngày hoàn thành',
                 dataIndex: 'deadline',
                 key: 'deadline',
             },
             {
-                title: 'hoàn thành',
+                title: 'Hoàn thành',
                 dataIndex: 'complete',
                 key: 'complete',
             },
             {
-                title: 'thành viên',
+                title: 'Thành viên',
                 dataIndex: 'member',
                 key: 'member',
             },
             {
-                title: 'trạng thái',
+                title: 'Trạng thái',
                 dataIndex: 'status',
                 key: 'status',
             },
         ],
         data: listTask.map((value) => ({
-            id:value.id,
+            id: value.id,
             name: value.name,
             startDate: value.startDate,
             deadline: value.deadline,
@@ -110,9 +124,13 @@ const Task = ({ id }) => {
                 const token = localStorage.getItem('token');
                 axios.defaults.headers.common['Auth'] = `${token}`;
                 const res = await axios.post("http://localhost:8080/api/user/list-user-by-projectId", projectId)
-                console.log(res)
-                const resProject = await axios.post("http://localhost:8080/api/task/view-all-tasks/", projectId)
-                setListTask(resProject.data)
+                if (user.admin) {
+                    const resProject = await axios.post("http://localhost:8080/api/task/view-all-tasks/", projectId)
+                    setListTask(resProject.data)
+                } else {
+                    const resProject = await axios.post("http://localhost:8080/api/task/get-all-tasks/", projectId)
+                    setListTask(resProject.data)
+                }
                 const newData = res.data.map((user) => {
                     let key = user.id
                     return ({
@@ -160,17 +178,62 @@ const Task = ({ id }) => {
                     <Form.Item label="Deadline">
                         <DatePicker onChange={onChange} />
                     </Form.Item>
-
-                    <Button onClick={submit}>Lưu Task</Button>
+                    <Button onClick={submit} style={{ backgroundColor: "#25c8f1", color: "white", marginLeft: "2rem" }}>Lưu Task</Button>
                 </Form>
             </div>
             <div className='viewTask'>
-                <h2>Danh sách công việc</h2>
-                <TableComponent
-                    dataTable={dataTable}
-                    click={true}
-                    text={text}
-                />
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <ListTask
+                                dataTable={dataTable}
+                                text={text}
+                            />}
+                    />
+                    <Route
+                        path="/:id"
+                        element={<ViewTask />}
+                    />
+                </Routes>
+            </div>
+        </div>
+    )
+}
+
+const Member = () => {
+    return (
+        <div className='Project_Member'>
+            <div className='Project_Member-lead'>
+                <div>
+                    <Avatar circle={"80px"} />
+                    <div>
+                        <span>tên</span>
+                        <span>nhiệm vụ</span>
+                        <span>số điện thoại</span>
+                    </div>
+                </div>
+                <p>Giới thiệu bản thân sẽ giúp đối
+                    phương nắm bắt được thông tin cơ bản về bạn.</p>
+            </div>
+            <hr />
+            <div className='Project_Member-memberMain'>
+                {[1, 2, 3, 4].map(() => {
+                    return (
+                        <div className='Project_Member-member'>
+                            <div>
+                                <Avatar circle={"80px"} />
+                                <div>
+                                    <span>tên</span>
+                                    <span>nhiệm vụ</span>
+                                    <span>số điện thoại</span>
+                                </div>
+                            </div>
+                            <p>Giới thiệu bản thân sẽ giúp đối
+                                phương nắm bắt được thông tin cơ bản về bạn.</p>
+                        </div>
+                    )
+                })}
             </div>
         </div>
     )
@@ -179,6 +242,9 @@ const Task = ({ id }) => {
 const Children = ({ value, id }) => {
     if (value === 'Công việc') {
         return <Task id={id} />
+    }
+    else if (value === 'Thành viên') {
+        return <Member />
     }
 }
 

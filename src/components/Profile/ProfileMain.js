@@ -33,7 +33,6 @@ const ProfileMain = () => {
   const updateData = (id) => {
     navigate(`update/${id}`)
   }
-  console.log(data)
   if (!data) return
   return (
     <div>

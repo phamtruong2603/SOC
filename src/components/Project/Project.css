@@ -1,9 +1,40 @@
 .addTask {
     display: block;
 }
+
 .viewTask {
     margin-top: 2rem;
 }
+
 .viewTask h2 {
     margin: 0.5rem 0;
+}
+
+.Project_Member-memberMain {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.Project_Member-member,
+.Project_Member-lead {
+    width: 30%;
+    border: 1px solid #25c8f1;
+    margin: 1rem 0;
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+}
+
+.Project_Member-member>div,
+.Project_Member-lead>div {
+    display: flex;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid black;
+}
+
+.Project_Member-member span,
+.Project_Member-lead span {
+    display: block;
+    margin-left: 1rem;
 }

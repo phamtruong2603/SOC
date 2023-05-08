@@ -21,7 +21,6 @@ const Home = () => {
       [name]: value,
     })
   }
-  console.log(user)
   if (user && user.admin) {
     navigate('/admin')
   }
@@ -35,7 +34,6 @@ const Home = () => {
       localStorage.setItem('token', respont.data.token);
       setUser(respont.data)
     } catch (error) {
-      console.log("faaaa")
       messageerror()
     }
   }

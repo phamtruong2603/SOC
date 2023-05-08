@@ -5,8 +5,8 @@ import { MessageContexts } from '../../../components/Message/Message';
 
 const CreateAccount = () => {
   const [data, setData] = useState()
-  const {messagesuccess, messageerror} = useContext(MessageContexts)
-  
+  const { messagesuccess, messageerror } = useContext(MessageContexts)
+
   const setPrams = (e) => {
     let name = e.target.name
     let value = e.target.value
@@ -23,7 +23,7 @@ const CreateAccount = () => {
   };
   const submit = async (e) => {
     e.preventDefault()
-    
+
     try {
       const token = localStorage.getItem('token');
       axios.defaults.headers.common['Auth'] = `${token}`;
@@ -67,8 +67,7 @@ const CreateAccount = () => {
       <Form.Item label="password">
         <Input name='password' onChange={setPrams} />
       </Form.Item>
-
-      <Button onClick={submit}>Tạo tài khoản</Button>
+      <Button onClick={submit} style={{ backgroundColor: "#25c8f1", color: "white", marginLeft: "2rem" }}>Tạo tài khoản</Button>
     </Form>
   );
 }

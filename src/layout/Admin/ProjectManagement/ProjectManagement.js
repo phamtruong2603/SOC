@@ -14,7 +14,6 @@ const { Search } = Input;
 export const ProjectManagementMain = () => {
     const { project, setProject } = useContext(ProjectContexts);
     const { user } = useContext(UserContexts)
-    console.log(user)
     const navigate = useNavigate()
     const [search, setSearch] = useState([]);
     const addProject = () => {
@@ -67,7 +66,7 @@ export const ProjectManagementMain = () => {
                     if (a.length) isSearch = true
                     return (
                         <CardProject
-                            isSearch={isSearch}
+                            isSearch={isSearch}     
                             key={value.id}
                             value={value}
                         />
@@ -90,7 +89,7 @@ const ProjectManagement = () => {
                 element={<AddProject />}
             />
             <Route
-                path="/:id"
+                path="/:id/*"
                 element={<Project />}
             />
         </Routes>

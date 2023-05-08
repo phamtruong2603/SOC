@@ -26,7 +26,7 @@ function HeaderMain() {
 
         <ul className="homeToolbarNav">
           <li onClick={dashboard} className='avatarHeader'><Avatar circle={"50px"} /></li>
-          <li onClick={submit}><span className="signin in">LogOut</span></li>
+          <li onClick={submit}><span className="signin in">Đăng Xuất</span></li>
         </ul>
       </nav>
     </div>

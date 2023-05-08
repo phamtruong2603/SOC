@@ -61,12 +61,12 @@ const MainMemberManage = () => {
             }
         })()
     }, [])
-    console.log(users)
     return (
         <div>
             <TableComponent
                 dataTable={dataTable}
                 click={true}
+                text={"chi tiết"}
             />
         </div>
     )
